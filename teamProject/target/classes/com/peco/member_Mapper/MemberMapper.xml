@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.peco.mapper.MemberMapper">
+	
+	<select id="member_Profile" resultType="com.peco.Member_VO.MemberVO">
+		select * from P_member where id=#{id}
+	</select>
+	
+	<update id="member_update">
+		update P_member set 
+			pw = #{pw},
+			mName = #{mName},
+			mPhone = #{mPhone},
+			email = #{email},
+			nickname = #{nickname},
+			age = #{age}
+			where m_id = #{m_id}
+	</update>
+</mapper>
