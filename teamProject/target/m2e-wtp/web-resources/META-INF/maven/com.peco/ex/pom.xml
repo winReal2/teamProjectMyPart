@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.winreal</groupId>
+	<groupId>com.peco</groupId>
 	<artifactId>ex</artifactId>
 	<name>ex01</name>
 	<packaging>war</packaging>
@@ -233,7 +233,17 @@
 	    </dependency>
     
     
-    
+	    <dependency>                                   
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>         
+			<version>2.0.1</version>                   
+		</dependency>                                  
+		                                               
+		<dependency>                                   
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>        
+			<version>2.0.1</version>                   
+		</dependency>   
     
 		
 		

@@ -1,7 +1,5 @@
 package com.peco.member_Service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +11,16 @@ public class MemberServiceImpl implements MemberService{
 
 	@Autowired
 	MemberMapper memberMapper;
+	
+
+//	@Override
+//	public int update(MemberVO vo) {
+//		return memberMapper.update(vo);
+//	}
 
 	@Override
-	public int update(MemberVO vo) {
-		return memberMapper.member_update(vo);
+	public MemberVO getOne(String id) {
+		return memberMapper.member_getOne(id);
 	}
 	
 }

@@ -7,7 +7,9 @@ import com.peco.Member_VO.MemberVO;
 @Service
 public interface MemberService {
 	
-	int update(MemberVO vo);
+	public MemberVO getOne(String id);
+	
+//	public int update(MemberVO vo);
 	
 	
 }

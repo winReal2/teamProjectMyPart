@@ -23,23 +23,23 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.peco" />
-	<context:component-scan base-package="com.peco.controller" />
+	<context:component-scan base-package="com.peco.member_Controller" />
 	<context:component-scan base-package="com.peco.interceptor"></context:component-scan>
 	
-	<interceptors>
-		<!-- 로그인 체크 -->
+	<!-- interceptors>
+		<로그인 체크 >
 		<interceptor>
-			<mapping path="/board/*"/> <!-- 무한반복 주의(/board/login) -->
-			<exclude-mapping path=""/> <!-- 제외할 요청, 경로 -->
+			<mapping path="/board/*"/> < 무한반복 주의(/board/login)>
+			<exclude-mapping path=""/> < 제외할 요청, 경로>
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
 	
-		<!-- 관리자 체크 -->
+		<관리자 체크>
 		<interceptor>
 			<mapping path="/admin**"/>
 			<beans:ref bean="adminInterceptor"/>
 		</interceptor>
-	</interceptors>
+	</interceptors -->
 	
 	
 	
