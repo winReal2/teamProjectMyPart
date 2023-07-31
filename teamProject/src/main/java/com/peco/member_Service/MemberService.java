@@ -9,7 +9,10 @@ public interface MemberService {
 	
 	public MemberVO getOne(String id);
 	
-//	public int update(MemberVO vo);
+	public int update(MemberVO vo);
+
+
+
 	
 	
 }

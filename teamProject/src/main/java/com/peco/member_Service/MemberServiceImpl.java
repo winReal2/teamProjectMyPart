@@ -12,15 +12,15 @@ public class MemberServiceImpl implements MemberService{
 	@Autowired
 	MemberMapper memberMapper;
 	
-
-//	@Override
-//	public int update(MemberVO vo) {
-//		return memberMapper.update(vo);
-//	}
-
 	@Override
 	public MemberVO getOne(String id) {
 		return memberMapper.member_getOne(id);
 	}
 	
+	@Override
+	public int update(MemberVO vo) {
+		return memberMapper.update(vo);
+	}
+
+
 }
