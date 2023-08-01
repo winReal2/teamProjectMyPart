@@ -1,4 +1,4 @@
-package com.peco.Member_VO;
+package com.peco.VO;
 
 import lombok.Data;
 

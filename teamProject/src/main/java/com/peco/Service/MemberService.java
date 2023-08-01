@@ -1,8 +1,8 @@
-package com.peco.member_Service;
+package com.peco.Service;
 
 import org.springframework.stereotype.Service;
 
-import com.peco.Member_VO.MemberVO;
+import com.peco.VO.MemberVO;
 
 @Service
 public interface MemberService {

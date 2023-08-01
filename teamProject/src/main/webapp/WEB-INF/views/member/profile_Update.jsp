@@ -14,34 +14,39 @@
 <%
 String id = request.getParameter("id");
 String pw = request.getParameter("pw");
+String mName = request.getParameter("mName");
+String mPhone = request.getParameter("mPhone");
+String email = request.getParameter("email");
+String nickname = request.getParameter("nickname");
+String age = request.getParameter("age");
 
 System.out.println("id : " + id);
 System.out.println("pw : " + pw);
 
 %>
 
-<form id='profileForm' name='profile' action='/member/profile' method='post'>
+<form id='profileUpdateForm' name='profileUpdate' action='/member/profile' method='post'>
 	<c:set var="memberVO" value="${member }"/>
 		<table border='1px' width='400px' height='300px'>
 		<tr>
 			<th>회원번호</th>
-			<td><input type='text' name='m_id' readonly value='${param.m_id }' style="height:100%; width:99%"></td>
+			<td><input type='text' name='m_id' readonly value='${member.m_id }' style="height:100%; width:99%"></td>
 		</tr>
 		<tr>
 			<th>아이디</th>
-			<td><input type='text' name='id' readonly value='${param.id }'  style="height:100%; width:99%"></td>
+			<td><input type='text' name='id' readonly value='${member.id }'  style="height:100%; width:99%"></td>
 		</tr>
 		<tr>
 			<th>비밀번호</th>
-			<td><input type='text' name='pw' readonly value='${param.pw }' style="height:100%; width:99%"></td>
+			<td><input type='text' name='pw' readonly value='${member.pw }' style="height:100%; width:99%"></td>
 		</tr>
 		<tr>
 			<th>이름</th>
-			<td><input type='text' name='mName' value='${param.mName }' style="height:100%; width:99%"></td>
+			<td><input type='text' name='mName' value='${member.getMName() }' style="height:100%; width:99%"></td>
 		</tr>
 		<tr>
 			<th>전화번호</th>
-			<td><input type='text' name='mPhone' value='${param.mPhone }' style="height:100%; width:99%"></td>
+			<td><input type='text' name='mPhone' value='${member.getMPhone() }' style="height:100%; width:99%"></td>
 		</tr>
 		<tr>
 			<th>이메일</th>

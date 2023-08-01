@@ -23,7 +23,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.peco" />
-	<context:component-scan base-package="com.peco.member_Controller" />
+	<context:component-scan base-package="com.peco.Controller" />
 	<context:component-scan base-package="com.peco.interceptor"></context:component-scan>
 	
 	<!-- interceptors>

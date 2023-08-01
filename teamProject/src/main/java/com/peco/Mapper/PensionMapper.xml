@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.peco.Mapper.PensionMapper">
+
+	<select id="getOne_P" resultType="com.peco.VO.PensionVO">
+		select * from Pension where m_id=#{m_id}
+	</select>
+
+	<update id = "update_P">
+		update Pension set
+			p_id = #{p_id},
+			pName = #{pName},
+			Addr = #{Addr},
+			openHour = #{openHour},
+			ParkYN = #{ParkYN},
+			checkYN = #{checkYN}
+			where m_id = #{m_id}
+	</update>
+</mapper>
