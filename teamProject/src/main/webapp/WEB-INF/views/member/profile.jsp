@@ -15,8 +15,11 @@
 <form id='profileForm' name='profile' action='/member/profile_Update' method='post'>
 	<c:set var="memberVO" value="${member }"/>
 
-	<table border='1px' width='400px' height='300px'>
-
+	<table border='1px' width='400px' height='450px'>
+		<tr>
+			<th>프로필사진</th>
+			<td></td> <!-- 회원가입시 등록한 프로필사진 -->
+		</tr>
 		<tr>
 			<th>회원번호</th>
 			<td>${member.m_id }</td>

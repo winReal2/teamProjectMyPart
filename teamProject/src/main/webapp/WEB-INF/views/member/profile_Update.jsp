@@ -27,7 +27,14 @@ System.out.println("pw : " + pw);
 
 <form id='profileUpdateForm' name='profileUpdate' action='/member/profile' method='post'>
 	<c:set var="memberVO" value="${member }"/>
-		<table border='1px' width='400px' height='300px'>
+		<table border='1px' width='400px' height='450px'>
+		<tr>
+			<th>프로필사진</th>
+			<td style="height:150px">
+				<img alt="" src="">
+				<input type="file" name='profileImg' value='사진변경'  >
+			</td>
+		</tr>
 		<tr>
 			<th>회원번호</th>
 			<td><input type='text' name='m_id' readonly value='${member.m_id }' style="height:100%; width:99%"></td>

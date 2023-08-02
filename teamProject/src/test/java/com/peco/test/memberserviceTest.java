@@ -2,6 +2,8 @@ package com.peco.test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.UUID;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +11,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.peco.Mapper.MemberMapper;
+import com.peco.Service.FUploadService;
 import com.peco.Service.MemberService;
 import com.peco.Service.PensionService;
+import com.peco.VO.FUploadVO;
 import com.peco.VO.MemberVO;
 import com.peco.VO.PensionVO;
 
@@ -26,6 +30,9 @@ public class memberserviceTest {
 	
 	@Autowired
 	PensionService pensionService;
+	
+	@Autowired
+	FUploadService fUploadService;
 
 //[MemberService test]=======================================	
 	
@@ -87,6 +94,33 @@ public class memberserviceTest {
 		int res = pensionService.update_P(vo);
 		
 		assertEquals(res, 1);
+	}
+	
+//[fUpload Service test]=======================================	
+	
+	@Test
+	public void insert() {
+		FUploadVO vo = new FUploadVO();
+		
+		vo.setUploadpath("uploadpath");
+		vo.setFileName("fileName");
+		vo.setFileType("fileType");
+		vo.setM_id("m001");
+		UUID uuid = UUID.randomUUID();
+		vo.setUuid(uuid.toString());
+		
+		System.out.println("vo : " + vo);
+		int res = fUploadService.insert(vo);
+		System.out.println("res : " + res);
+		assertEquals(1, res);
+	}
+	
+	@Test
+	public void delete() {
+		FUploadVO vo = new FUploadVO();
+		log.info("delete()");
+		int res = fUploadService.delete("m001", "9fe779da-5321-4ca8-83fe-6e1e7f4f5bcf");
+		assertEquals(1,	res);
 	}
 
 }

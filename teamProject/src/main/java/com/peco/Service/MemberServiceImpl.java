@@ -13,8 +13,8 @@ public class MemberServiceImpl implements MemberService{
 	MemberMapper memberMapper;
 	
 	@Override
-	public MemberVO getOne(String id) {
-		return memberMapper.member_getOne(id);
+	public MemberVO getOne(String m_id) {
+		return memberMapper.member_getOne(m_id);
 	}
 	
 	@Override

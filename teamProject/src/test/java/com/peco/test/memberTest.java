@@ -2,14 +2,18 @@ package com.peco.test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.UUID;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.peco.Mapper.FUploadMapper;
 import com.peco.Mapper.MemberMapper;
 import com.peco.Mapper.PensionMapper;
+import com.peco.VO.FUploadVO;
 import com.peco.VO.MemberVO;
 import com.peco.VO.PensionVO;
 import com.peco.test.memberTest;
@@ -26,6 +30,9 @@ public class memberTest {
 	
 	@Autowired
 	PensionMapper pensionMapper;
+	
+	@Autowired
+	FUploadMapper fUploadMapper;
 
 //[Member Mapper test]=================================================================
 	
@@ -89,6 +96,31 @@ public class memberTest {
 		assertEquals(res, 1);
 	}
 	
+//[FUpload  Mapper test]====================================================================
 	
+	@Test
+	public void insert() {
+		FUploadVO vo = new FUploadVO();
+		
+		vo.setUploadpath("uploadpath");
+		vo.setFileName("fileName");
+		vo.setFileType("fileType");
+		vo.setM_id("m001");
+		UUID uuid = UUID.randomUUID();
+		vo.setUuid(uuid.toString());
+		
+		System.out.println("vo : " + vo);
+		int res = fUploadMapper.insert(vo);
+		System.out.println("res : " + res);
+		assertEquals(1, res);
+	}
+	
+	@Test
+	public void delete() {
+		FUploadVO vo = new FUploadVO();
+		log.info("delete()");
+		int res = fUploadMapper.delete("m001", "8dd1cc93-8447-4223-83d1-8961c8858768");
+		assertEquals(1,	res);
+	}
 	
 }

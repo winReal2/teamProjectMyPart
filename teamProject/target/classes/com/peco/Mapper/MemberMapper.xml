@@ -5,7 +5,7 @@
 	
 
 	<select id="member_getOne" resultType="com.peco.VO.MemberVO">
-		select * from P_member where id=#{id}
+		select * from P_member where m_id=#{m_id}
 	</select>
 	
 
