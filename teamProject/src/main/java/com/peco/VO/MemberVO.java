@@ -12,5 +12,6 @@ public class MemberVO {
 	private String mPhone;
 	private String email;
 	private String nickname;
+	private String savePath;
 	private int age;
 }

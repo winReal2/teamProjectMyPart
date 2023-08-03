@@ -6,7 +6,7 @@ public interface MemberMapper{
 	
 
 	
-	public MemberVO member_getOne(String id);
+	public MemberVO member_getOne(String m_id);
 	
 	public int update(MemberVO vo);
 	

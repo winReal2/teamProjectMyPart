@@ -5,7 +5,10 @@
 	
 
 	<select id="member_getOne" resultType="com.peco.VO.MemberVO">
-		select * from P_member where m_id=#{m_id}
+		select P_member.*, uploadpath||F_img.m_id||'_'||filename savePath 
+		from P_member, F_img 
+		where P_member.m_id = F_img.m_id
+		and P_member.m_id = #{m_id}
 	</select>
 	
 

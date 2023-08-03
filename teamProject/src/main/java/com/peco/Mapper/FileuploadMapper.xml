@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.peco.Mapper.FUploadMapper">
+<mapper namespace="com.peco.Mapper.FileuploadMapper">
 
-	<insert id="insert">
+	<insert id="insert_Img">
 		insert into F_img
-		values(#{uuid}, #{uploadpath}, #{fileName}, #{fileType}, #{m_id})
+		values(#{uploadpath}, #{fileName}, #{fileType}, #{m_id})
 	</insert>
 
-	<delete id="delete">
+	<delete id="delete_Img">
 		delete F_img
 		where m_id=#{m_id}
 		and uuid=#{uuid}
 	</delete>
+	
+
+	
 	
 </mapper>
 	

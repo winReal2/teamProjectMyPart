@@ -3,9 +3,8 @@ package com.peco.VO;
 import lombok.Data;
 
 @Data
-public class FUploadVO {
+public class FileuploadVO {
 
-	private String uuid;
 	private String uploadpath;
 	private String fileName;
 	private String fileType;

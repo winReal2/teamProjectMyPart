@@ -10,15 +10,22 @@
 </head>
 <body>
 <h2>마이페이지</h2>
+<script type="text/javascript">
+	window.addEventListener('load', function(){
+		let profile = '/profile/6f1f8850-84e9-414b-a3ba-fb86f9543be9_프로필이미지1.jpeg';
+		img_profile.src = '/peco/display?fileName=' + encodeURIComponent(profile);		
+	})
+	
+</script>
 
 
-<form id='profileForm' name='profile' action='/member/profile_Update' method='post'>
+<form id='profileForm' name='profile' action='/peco/profile_Update' method='post'>
 	<c:set var="memberVO" value="${member }"/>
 
 	<table border='1px' width='400px' height='450px'>
 		<tr>
 			<th>프로필사진</th>
-			<td></td> <!-- 회원가입시 등록한 프로필사진 -->
+			<td><img id='img_profile' src=''></a></td> <!-- 회원가입시 등록한 프로필사진 -->
 		</tr>
 		<tr>
 			<th>회원번호</th>

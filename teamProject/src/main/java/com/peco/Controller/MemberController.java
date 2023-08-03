@@ -24,10 +24,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.peco.Service.FUploadService;
+import com.peco.Service.FileuploadService;
 import com.peco.Service.MemberService;
 import com.peco.Service.PensionService;
-import com.peco.VO.FUploadVO;
+import com.peco.VO.FileuploadVO;
 import com.peco.VO.MemberVO;
 import com.peco.VO.PensionVO;
 
@@ -35,9 +35,9 @@ import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnails;
 
 @Controller
-@RequestMapping("/member/*")
+@RequestMapping("/peco/*")
 @Log4j
-public class MemberController {
+public class MemberController extends CommonRestController{
 
 	@Autowired
 	MemberService service;
@@ -46,11 +46,11 @@ public class MemberController {
 	PensionService pensionService;
 
 	@Autowired
-	FUploadService fUploadService;
+	FileuploadService fileuploadService;
 	
 	
 	@GetMapping("profile")
-	public String getOne(HttpSession session, MemberVO vo) {
+	public String getOne(HttpSession session, MemberVO vo, Model model ) {
 		try {
 			log.info("======================= m_id" + vo);
 			if(vo.getM_id().equals("") || vo.getM_id() == null ) {
@@ -59,7 +59,9 @@ public class MemberController {
 			}
 			
 			MemberVO member = service.getOne(vo.getM_id());
+			//FileuploadVO fileupload = fileuploadService.insert_Img(fileupload.getM_id());
 			session.setAttribute("member", member);
+			
 			
 			return "/member/profile";
 			
@@ -75,7 +77,8 @@ public class MemberController {
 	public String updatePage(Model model, HttpSession session) {
 		
 		MemberVO member = (MemberVO) session.getAttribute("member");
-		    model.addAttribute("member", member);
+		
+		model.addAttribute("member", member);
   
 	    return "/member/profile_Update";
 	}
@@ -83,10 +86,10 @@ public class MemberController {
 	
 	//수정페이지에서 데이터 입력 후 저장
 	@PostMapping("profile")
-	public String updateSave(Model model, MemberVO vo) {
+	public @ResponseBody Map<String, Object> updateSave(Model model,@RequestBody MemberVO vo) {
 		
 		//회원정보 업데이트
-		service.update(vo);
+		int res = service.update(vo);
 		
 		//업데이트된 회원정보 다시 조회
 		MemberVO updateMember = service.getOne(vo.getM_id());
@@ -94,7 +97,9 @@ public class MemberController {
 		//모델에 업데이트된 회원 정보 추가
 		model.addAttribute("member", updateMember);
 		
-		return "/member/profile";
+		Map<String, Object> map = responseWriteMap(res);
+		
+		return map;
 	}
 	// int member = service.update(vo);
 	// model.addAttribute("member", member);
@@ -181,116 +186,7 @@ public class MemberController {
 	}
 	
 	
-//프로필사진 첨부 ==========================================================================	
 	
-
-	private static final String ATTACHES_DIR = "c:\\upload\\";
-	/**
-	 * 첨부파일 저장 및 데이터베이스에 등록
-	 * @param files
-	 * @param bno
-	 * @return
-	 */
-	public int FUpload(List<MultipartFile> files, int bno) {
-		
-		int insertRes = 0;
-
-		for(MultipartFile file : files) {
-			
-			//선택된 파일이 없는 경우 다음 파일로 이동
-			if(file.isEmpty()) {
-				continue;
-			}
-				log.info("oFileName : " + file.getOriginalFilename());
-				log.info("name : " + file.getName());
-				log.info("size : " + file.getSize());
-			
-				try {
-
-					UUID uuid = UUID.randomUUID();
-					String saveFileName =  
-							uuid + "_" + file.getOriginalFilename();
-					String uploadPath = getFolder();
-
-					File sFile = new File(ATTACHES_DIR 
-										+ uploadPath    //경로반환 (2023\07\18\) 
-										+ saveFileName);
-					
-					//file(원본파일)을 sFile(저장할 대상 파일)에 저장  
-					file.transferTo(sFile);
-					
-					FUploadVO vo = new FUploadVO();
-
-					//★★★이미지 파일일 경우 썸네일
-					// 주어진 파일의 Mime 유형을 확인
-					String contentType = Files.probeContentType(sFile.toPath());
-					String m_id = "m001";
-					// Mime타입을 확인하여 이미지인 경우 썸네일을 생성
-					if(contentType != null && contentType.startsWith("image")) {
-						vo.setFileType("Img");
-						
-						//썸네일 생성 경로
-						String thumbnail =  ATTACHES_DIR 
-											+ uploadPath   
-											+ "s_"
-											+ saveFileName;
-						//썸네일 생성
-						//원본파일, 크기, 저장될 파일경로
-						Thumbnails.of(sFile).size(100, 100).toFile(thumbnail);
-					} else {
-						vo.setFileType("Other");
-					}
-					
-					vo.setM_id(m_id);
-					vo.setFileName(file.getOriginalFilename());
-					vo.setUploadpath(uploadPath);
-					vo.setUuid(uuid.toString());
-					
-					int res = fUploadService.insert(vo);
-					
-					if(res>0) {
-						insertRes++;
-					}
-					
-				} catch (IllegalStateException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		return insertRes;
-		}
-	
-	private String getFolder() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	//파일삭제
-	@GetMapping("/profile/{uuid}/{m_id}")
-	public @ResponseBody Map<String, Object> delete(
-							@PathVariable("uuid") String uuid
-							, @PathVariable("m_id") String m_id){
-		Map<String, Object> response = new HashMap();
-		
-		int res = fUploadService.delete(m_id, uuid);
-		
-	    if (res > 0) {
-	        response.put("success", true);
-	        response.put("message", "프로필 사진이 삭제되었습니다.");
-	    } else {
-	        response.put("success", false);
-	        response.put("message", "프로필 사진 삭제에 실패하였습니다.");
-	    }
-
-	    return response;
-
-		}
-	
-
 	
 	@GetMapping("css")
 	public String css(){
